@@ -92,8 +92,6 @@ b8 application_create(game* game_inst) {
     return TRUE;
 }
 
-// TODO: Remove
-#pragma clang diagnostic ignored "-Wunused-but-set-variable"
 b8 application_run() {
     clock_start(&app_state.clock);
     clock_update(&app_state.clock);
@@ -201,7 +199,7 @@ b8 application_on_key(u16 code, void* sender, void* listener_inst, event_context
         u16 key_code = context.data.u16[0];
         if (key_code == KEY_ESCAPE) {
             // NOTE: Technically firing an event to itself, but there may be other listeners.
-            event_context data = {};
+            event_context data = {0};
             event_fire(EVENT_CODE_APPLICATION_QUIT, 0, data);
 
             // Block anything else from processing this.
