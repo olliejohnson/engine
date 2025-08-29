@@ -13,7 +13,7 @@ void report_assertion_failure(const char* expression, const char* message, const
 
 b8 initialize_logging() {
     // TODO: create log file.
-    return TRUE;
+    return true;
 }
 
 void shutdown_logging() {
@@ -26,7 +26,7 @@ void log_output(log_level level, const char* message, ...) {
 
     // Technically imposes a 32k character limit on a single log entry, but...
     // DON'T DO THAT!
-    const i32 msg_length = 32000;
+    enum { msg_length = 32000 };
     char out_message[msg_length];
     memset(out_message, 0, sizeof(out_message));
 

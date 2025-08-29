@@ -28,7 +28,7 @@ void vulkan_renderpass_create(
     subpass.pipelineBindPoint = VK_PIPELINE_BIND_POINT_GRAPHICS;
 
     // Attachments TODO: make this configurable
-    u32 attachment_description_count = 2;
+    enum { attachment_description_count = 2 };
     VkAttachmentDescription attachment_descriptions[attachment_description_count];
 
     // Color attachment
@@ -62,6 +62,9 @@ void vulkan_renderpass_create(
     depth_attachment.stencilStoreOp = VK_ATTACHMENT_STORE_OP_DONT_CARE;
     depth_attachment.initialLayout = VK_IMAGE_LAYOUT_UNDEFINED;
     depth_attachment.finalLayout = VK_IMAGE_LAYOUT_DEPTH_STENCIL_ATTACHMENT_OPTIMAL;
+    // Memory of array not zero. Causes invalid flags in VkAttachmentDescription
+    // When creating the renderpass.
+    depth_attachment.flags = 0;
 
     attachment_descriptions[1] = depth_attachment;
 
